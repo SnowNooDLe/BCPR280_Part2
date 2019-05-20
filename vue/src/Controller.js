@@ -2,11 +2,12 @@
 /* eslint-disable no-undef */
 /* jshint esversion: 6 */
 Vue.component('C1', {
-  template: '<div><input type="file" id="myFile" @change="addFiles" multiple><br><button v-if="files.length == 2" @click="submitFiles">Submit Files</button><br><button @click="calcCorrelation">Show Correlation</button> <br> {{ correlation }}</div>',
+  template: '<div><input type="file" id="myFile" @change="addFiles" multiple><br><button v-if="files.length == 2" @click="submitFiles">Submit Files</button><br><button v-if = "status == true" @click="calcCorrelation">Show Correlation</button> <br> {{ correlation }}</div>',
   data: function() {
     return{
       files: [],
       numbers: [],
+      status: false,
       correlation: "What Am I"
     }
   },
@@ -26,6 +27,7 @@ Vue.component('C1', {
           this.numbers.push(ct);
         }
         reader.readAsText(file);
+        this.status = true;
       }
     },
     calcCorrelation: function(){
