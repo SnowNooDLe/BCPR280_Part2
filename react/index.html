@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculating correlation of two arrays of numbers</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="css/stylesheet.css">  
+    <!-- Model  -->
+    <script src="src/Main.js"></script>
+    <script>
+        var aReact = new Calculator()
+    </script>
+    
+</head>
+<body>
+    <h1>Assignment 2 with React</h1>
+
+    
+    <!-- VIEW -->
+
+    <div id="app2">
+    </div>
+    
+    <!-- Controller-->
+    <script type="text/babel">
+    class Calculation extends React.Component{
+        constructor (props){
+            super(props);
+            this.addFileA = this.addFileA.bind(this);
+            this.addFileB = this.addFileB.bind(this);
+            this.submitFiles = this.submitFiles.bind(this);
+            this.calcCorrelation = this.calcCorrelation.bind(this);
+            this.files = [];
+            this.numbers = [];
+            this.status = false;
+            this.result = "What Am I ?!";
+        }
+
+        addFileA(event){
+            let aFile = event.target.files[0]
+            if (aFile.type === "text/plain") this.files.push(aFile);
+            console.log(this.files);
+        }
+
+        addFileB(event){
+            let aFile = event.target.files[0]
+            if (aFile.type === "text/plain") this.files.push(aFile);
+        }
+
+        submitFiles(event){
+            for (let file of this.files){
+                const reader = new FileReader();
+                console.log("Im here")
+                reader.onload = e => {
+                    let ct = e.target.result.split('\r\n').map(x => parseFloat(x));
+                    console.log(ct);
+                    this.numbers.push(ct);
+                }
+                reader.readAsText(file);
+                this.status = true;
+            }
+        }
+
+        calcCorrelation (event) {
+            this.result = aReact.calcCorrelation(this.numbers);
+            
+        }
+
+        render () {
+            return (
+                <div>
+                    <input type="file" onChange={this.addFileA}></input><br />
+                    <input type="file" onChange={this.addFileB}></input><br />
+                    <button onClick={this.submitFiles}>Submit Files</button>
+                    <br />
+                    <br />
+                    <button onClick={this.calcCorrelation}>Show Correlation</button>
+                    <br />
+                    { this.result }
+                </div>
+                )
+            }
+        }
+
+        const element = <Calculation />
+
+        ReactDOM.render(
+        element,
+        document.getElementById('app2')
+        )
+    </script>
+
+    
+</body>
+</html> 
