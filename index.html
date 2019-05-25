@@ -9,6 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Model  -->
     <script src="src/Model.js"></script>
+    <script>
+        var aCalculator = new Calculator();
+    </script>
     
 </head>
 <body>
@@ -16,9 +19,11 @@
     https://getbootstrap.com/docs/4.3/components/card/-->
     <div class="row">
         <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
+            <div class="card text-center" style="width: 35rem;">
+                <div class="card-header">
                     <h5 class="card-title">Assignment 2 with Vue</h5>
+                </div>
+                <div class="card-body">
                     <!-- VIEW -->
                     <!-- for VueJS -->
                     <div id="VuePart">
@@ -31,9 +36,11 @@
         </div>
 
         <div class="col-sm-6">
-            <div class="card">
-                <div class="card-body">
+            <div class="card text-center" style="width: 35rem;">
+                <div class="card-header">
                     <h5 class="card-title">Assignment 2 with React</h5>
+                </div>
+                <div class="card-body">
                     <!-- VIEW -->
                     <!-- for react -->
                     <div id="reactPart">
@@ -56,49 +63,58 @@
     class Calculation extends React.Component{
         constructor (props){
             super(props);
-            this.addFileA = this.addFileA.bind(this);
-            this.addFileB = this.addFileB.bind(this);
+            this.addFileA = this.addFile.bind(this);
+            this.addFileB = this.addFile.bind(this);
             this.submitFiles = this.submitFiles.bind(this);
             this.calcCorrelation = this.calcCorrelation.bind(this);
+            this.calcRegression = this.calcRegression.bind(this);
             this.files = [];
             this.numbers = [];
             this.status = false;
-            this.correlation = "What Am I ?!";
             this.state = {
                 cc: new Calculator()
             }
         }
 
-        addFileA(event){
-            let aFile = event.target.files[0]
-            if (aFile.type === "text/plain") this.files.push(aFile);
-            console.log(this.files);
-        }
-
-        addFileB(event){
+        addFile(event){
             let aFile = event.target.files[0]
             if (aFile.type === "text/plain") this.files.push(aFile);
         }
 
         submitFiles(event){
-            for (let file of this.files){
-                const reader = new FileReader();
-                reader.onload = e => {
-                    let ct = e.target.result.split('\r\n').map(x => parseFloat(x));
-                    console.log(ct);
-                    this.numbers.push(ct);
+            if (this.files.length < 2){
+                alert("You need to submit two files then click it again.");
+            } else {
+                for (let file of this.files){
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        let ct = e.target.result.split('\r\n').map(x => parseFloat(x));
+                        console.log(ct);
+                        this.numbers.push(ct);
+                    }
+                    reader.readAsText(file);
                 }
-                reader.readAsText(file);
                 this.status = true;
+                
             }
+            
         }
 
         calcCorrelation (event) {
-            this.state.cc.calcCorrelation(this.numbers);
+            this.state.cc.calculateRequirements(this.numbers);
+            this.state.cc.calcCorrelation();
             this.setState((state) => ({
                 cc: state.cc
             }))
             console.log(this.correlation);
+        }
+
+        calcRegression (event) {
+            this.state.cc.clacRegressionBetaOne();
+            this.state.cc.clacRegressionBetaZero();
+            this.setState((state) => ({
+                cc: state.cc
+            }))
         }
 
         render () {
@@ -106,12 +122,21 @@
                 <div>
                     <input type="file" onChange={this.addFileA}></input><br />
                     <input type="file" onChange={this.addFileB}></input><br />
-                    <button onClick={this.submitFiles}>Submit Files</button>
+                    <br />
+                    <button onClick={this.submitFiles} class="btn btn-primary">Submit Files</button>
                     <br />
                     <br />
-                    <button onClick={this.calcCorrelation}>Show Correlation</button>
+                    <button onClick={this.calcCorrelation} class="btn btn-primary">Show Correlation</button>
                     <br />
                     { this.state.cc.correlation }
+                    <br />
+                    <button onClick={this.calcRegression} class="btn btn-primary">Show Regression</button>
+                    <br />
+                    <label>Regression Beta One: {'\u00A0'}</label>
+                    { this.state.cc.regressionBetaOne }
+                    <br />
+                    <label>Regression Beta Zero: {'\u00A0'}</label>
+                    { this.state.cc.regressionBetaZero }
                 </div>
                 )
             }

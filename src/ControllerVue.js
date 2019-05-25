@@ -2,20 +2,22 @@
 /* eslint-disable no-undef */
 /* jshint esversion: 6 */
 Vue.component('c1', {
-  template: '<div><input type="file" id="myFile" @change="addFiles" multiple><br><button v-if="files.length == 2" @click="submitFiles">Submit Files</button><br><button v-if = "status == true" @click="calcCorrelation">Show Correlation</button> <br> {{ correlation }}</div>',
+  template: '<div><input type="file" @change="addFile"><br><input type="file" @change="addFile"><br><br><button v-if="files.length == 2" @click="submitFiles" class="btn btn-primary">Submit Files</button><br><br><button v-if = "status == true" @click="calcCorrelation" class="btn btn-primary">Show Correlation</button> <br> {{ correlation }}<br><button v-if = "status == true" @click="calcRegression" class="btn btn-primary">Show Regression</button> <br> <label>Regression Beta One </label> {{ regressionBetaOne }} <br> <label>Regression Beta Zero </label> {{ regressionBetaZero }}</div>',
   data: function() {
     return{
       files: [],
       numbers: [],
       status: false,
-      correlation: "What Am I"
+      correlation : "I am correlation",
+      regressionBetaOne : "I am regression beta one.",
+      regressionBetaZero : "I am regression beta zero."
     }
   },
   methods:{
-    addFiles: function(event){
-      for (let aFile of event.target.files) {
-        if (aFile.type === "text/plain") this.files.push(aFile);
-      }
+    addFile: function(event){
+      let aFile = event.target.files[0];
+      if (aFile.type === "text/plain") this.files.push(aFile);
+      
     },
     submitFiles: function(event){
       for (let file of this.files){
@@ -31,28 +33,18 @@ Vue.component('c1', {
       }
     },
     calcCorrelation: function(){
-      let sumOfX = 0;
-      let sumOfX2 = 0;
-      let sumOfY = 0;
-      let sumOfY2 = 0;
-      let xTimesY = 0;
-      let n = this.numbers[0].length;
-
-      for (i = 0; i < n; i++){
-        sumOfX += this.numbers[0][i];
-        sumOfY += this.numbers[1][i];
-        sumOfX2 += Math.pow(this.numbers[0][i], 2);
-        sumOfY2 += Math.pow(this.numbers[1][i], 2);
-        xTimesY += this.numbers[0][i] * this.numbers[1][i];
-      }
+      aCalculator.calculateRequirements(this.numbers);
+      aCalculator.calcCorrelation();
+      this.correlation = aCalculator.correlation;
       
-      let numerator = (n * xTimesY) - (sumOfX * sumOfY);
-      let left = n * sumOfX2 - Math.pow(sumOfX, 2);
-      let right = n * sumOfY2 - Math.pow(sumOfY, 2);
-      let denominator = Math.sqrt(left * right);
-
-      this.correlation = numerator / denominator;
+    },
+    calcRegression: function(){
+      aCalculator.clacRegressionBetaOne();
+      aCalculator.clacRegressionBetaZero();
+      this.regressionBetaOne = aCalculator.regressionBetaOne;
+      this.regressionBetaZero = aCalculator.regressionBetaZero;
     }
+
   }
 })
 

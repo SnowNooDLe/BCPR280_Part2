@@ -4,38 +4,57 @@
 // Used this Model for first four iterations
 class Calculator {
   constructor () {
-    this.sumOfX = 0;
-    this.sumOfX2 = 0;
-    this.sumOfY = 0;
-    this.sumOfY2 = 0;
-    this.xTimesY = 0;
+    this.sumX = 0;
+    this.sumXSquare = 0;
+    this.sumY = 0;
+    this.sumYSquare = 0;
+    this.sumXY = 0;
 
-    this.numerator = 0;
-    this.left = 0;
-    this.right = 0;
-    this.denominator = 0;
+    this.meanX = 0;
+    this.meanY = 0;
+    this.betaOne = 0;
+    this.betaTwo = 0;
 
-    this.correlation = 0;
+    this.dataLength = 0;
+
+    this.correlation = "I am correlation";
+    this.regressionBetaOne = "I am regression beta one.";
+    this.regressionBetaZero = "I am regression beta zero.";
   }
 
-  calcCorrelation(inputArray){
-    console.log("OH ME HERE");
-    let n = inputArray[0].length;
+  calculateRequirements(inputArray){
+    this.dataLength = inputArray[0].length;
 
-    for (let i = 0; i < n; i++){
-      this.sumOfX += inputArray[0][i];
-      this.sumOfY += inputArray[1][i];
-      this.sumOfX2 += Math.pow(inputArray[0][i], 2);
-      this.sumOfY2 += Math.pow(inputArray[1][i], 2);
-      this.xTimesY += inputArray[0][i] * inputArray[1][i];
+    for (let i = 0; i < this.dataLength; i++){
+      this.sumX += inputArray[0][i];
+      this.sumY += inputArray[1][i];
+      this.sumXSquare += Math.pow(inputArray[0][i], 2);
+      this.sumYSquare += Math.pow(inputArray[1][i], 2);
+      this.sumXY += inputArray[0][i] * inputArray[1][i];
     }
-    
-    this.numerator = (n * this.xTimesY) - (this.sumOfX * this.sumOfY);
-    this.left = n * this.sumOfX2 - Math.pow(this.sumOfX, 2);
-    this.right = n * this.sumOfY2 - Math.pow(this.sumOfY, 2);
-    this.denominator = Math.sqrt(this.left * this.right);
 
-    this.correlation = this.numerator / this.denominator;
+    this.meanX = this.sumX / this.dataLength;
+    this.meanY = this.sumY / this.dataLength;
+  }
+
+  calcCorrelation(){
+    let numerator = (this.dataLength * this.sumXY) - (this.sumX * this.sumY);
+    let left = this.dataLength * this.sumXSquare - Math.pow(this.sumX, 2);
+    let right = this.dataLength * this.sumYSquare - Math.pow(this.sumY, 2);
+    let denominator = Math.sqrt(left * right);
+
+    this.correlation = numerator / denominator;
+  }
+
+  clacRegressionBetaOne(){
+    let numerator = (this.sumXY - this.dataLength * this.meanX * this.meanY);
+    let denominator = (this.sumXSquare - this.dataLength * Math.pow(this.meanX, 2));
+
+    this.regressionBetaOne = numerator / denominator;
+  }
+
+  clacRegressionBetaZero(){
+    this.regressionBetaZero = this.meanY - this.regressionBetaOne * this.meanX;
   }
 }
 
