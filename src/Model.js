@@ -35,7 +35,7 @@ class Calculator {
     this.right = n * this.sumOfY2 - Math.pow(this.sumOfY, 2);
     this.denominator = Math.sqrt(this.left * this.right);
 
-    return this.correlation = this.numerator / this.denominator;
+    this.correlation = this.numerator / this.denominator;
   }
 }
 

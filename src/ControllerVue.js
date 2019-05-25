@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* jshint esversion: 6 */
-Vue.component('C1', {
+Vue.component('c1', {
   template: '<div><input type="file" id="myFile" @change="addFiles" multiple><br><button v-if="files.length == 2" @click="submitFiles">Submit Files</button><br><button v-if = "status == true" @click="calcCorrelation">Show Correlation</button> <br> {{ correlation }}</div>',
   data: function() {
     return{
@@ -57,5 +57,5 @@ Vue.component('C1', {
 })
 
 let app1 = new Vue({
-  el: '#correlation-component'
+  el: '#app1'
 })

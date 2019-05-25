@@ -6,12 +6,10 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="css/stylesheet.css">  
     <!-- Model  -->
-    <script src="src/Main.js"></script>
-    <script>
-        var aReact = new Calculator()
-    </script>
+    <script src="src/Model.js"></script>
     
 </head>
 <body>
@@ -19,11 +17,23 @@
 
     
     <!-- VIEW -->
-
-    <div id="app2">
+    <!-- for VueJS -->
+    <div id="VuePart">
+        <div id="app1">
+            <C1></C1>
+        </div>
     </div>
     
-    <!-- Controller-->
+    <!-- for react -->
+    <div id="reactPart">
+        <div id="app2">
+        </div>
+    </div>
+    
+    <!-- Controller for VueJS -->
+    <script src="src/ControllerVue.js"></script>
+
+    <!-- Controller for react-->
     <script type="text/babel">
     class Calculation extends React.Component{
         constructor (props){
@@ -35,7 +45,10 @@
             this.files = [];
             this.numbers = [];
             this.status = false;
-            this.result = "What Am I ?!";
+            this.correlation = "What Am I ?!";
+            this.state = {
+                cc: new Calculator()
+            }
         }
 
         addFileA(event){
@@ -52,7 +65,6 @@
         submitFiles(event){
             for (let file of this.files){
                 const reader = new FileReader();
-                console.log("Im here")
                 reader.onload = e => {
                     let ct = e.target.result.split('\r\n').map(x => parseFloat(x));
                     console.log(ct);
@@ -64,8 +76,11 @@
         }
 
         calcCorrelation (event) {
-            this.result = aReact.calcCorrelation(this.numbers);
-            
+            this.state.cc.calcCorrelation(this.numbers);
+            this.setState((state) => ({
+                cc: state.cc
+            }))
+            console.log(this.correlation);
         }
 
         render () {
@@ -78,7 +93,7 @@
                     <br />
                     <button onClick={this.calcCorrelation}>Show Correlation</button>
                     <br />
-                    { this.result }
+                    { this.state.cc.correlation }
                 </div>
                 )
             }
