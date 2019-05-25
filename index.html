@@ -70,7 +70,7 @@
             this.calcRegression = this.calcRegression.bind(this);
             this.files = [];
             this.numbers = [];
-            this.status = false;
+            this.submitStatus = false;
             this.state = {
                 cc: new Calculator()
             }
@@ -82,7 +82,7 @@
         }
 
         submitFiles(event){
-            if (this.files.length < 2){
+            if (this.files.length != 2){
                 alert("You need to submit two files then click it again.");
             } else {
                 for (let file of this.files){
@@ -94,27 +94,34 @@
                     }
                     reader.readAsText(file);
                 }
-                this.status = true;
+                this.submitStatus = true;
                 
             }
             
         }
 
         calcCorrelation (event) {
-            this.state.cc.calculateRequirements(this.numbers);
-            this.state.cc.calcCorrelation();
-            this.setState((state) => ({
-                cc: state.cc
-            }))
-            console.log(this.correlation);
+            if (this.submitStatus != true){
+                alert("Please submit two files first.");
+            } else {
+                this.state.cc.calculateRequirements(this.numbers);
+                this.state.cc.calcCorrelation();
+                this.setState((state) => ({
+                    cc: state.cc
+                }))
+            }
         }
 
         calcRegression (event) {
-            this.state.cc.clacRegressionBetaOne();
-            this.state.cc.clacRegressionBetaZero();
-            this.setState((state) => ({
-                cc: state.cc
-            }))
+            if (this.submitStatus != true){
+                alert("Please submit two files first.");
+            } else {
+                this.state.cc.clacRegressionBetaOne();
+                this.state.cc.clacRegressionBetaZero();
+                this.setState((state) => ({
+                    cc: state.cc
+                }))
+            }
         }
 
         render () {
