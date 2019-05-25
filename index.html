@@ -2,33 +2,51 @@
 <html lang="en">
 <head>
     <title>Calculating correlation of two arrays of numbers</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="css/stylesheet.css">  
     <!-- Model  -->
     <script src="src/Model.js"></script>
     
 </head>
 <body>
-    <h1>Assignment 2 with React</h1>
+    <!-- adding into card form 
+    https://getbootstrap.com/docs/4.3/components/card/-->
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Assignment 2 with Vue</h5>
+                    <!-- VIEW -->
+                    <!-- for VueJS -->
+                    <div id="VuePart">
+                        <div id="app1">
+                            <C1></C1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    
-    <!-- VIEW -->
-    <!-- for VueJS -->
-    <div id="VuePart">
-        <div id="app1">
-            <C1></C1>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Assignment 2 with React</h5>
+                    <!-- VIEW -->
+                    <!-- for react -->
+                    <div id="reactPart">
+                        <div id="app2">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <!-- for react -->
-    <div id="reactPart">
-        <div id="app2">
-        </div>
-    </div>
+    
+    
     
     <!-- Controller for VueJS -->
     <script src="src/ControllerVue.js"></script>
