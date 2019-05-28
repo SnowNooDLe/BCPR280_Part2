@@ -60,11 +60,13 @@ var app = http.createServer(function (request, response){
 
 
         aCalculator.calculateRequirements(dataXY)
- 
+        aCalculator.calcCorrelation()
         aCalculator.clacRegressionBetaOne()
         let regressionBetaOne = aCalculator.regressionBetaOne
         aCalculator.clacRegressionBetaZero()
         let regressionBetaZero = aCalculator.regressionBetaZero
+        
+        console.log("regression from nodeServer.js : " + regressionBetaOne + " " + regressionBetaZero)
 
         let resultRegression = {
             "Regression Beta One: ": regressionBetaOne,

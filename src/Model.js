@@ -42,9 +42,11 @@ class Calculator {
     let numerator = (this.sumXY - this.dataLength * this.meanX * this.meanY);
     let denominator = (this.sumXSquare - this.dataLength * Math.pow(this.meanX, 2));
     this.regressionBetaOne = numerator / denominator;
+    console.log("regression from Model.js : " + this.regressionBetaOne)
   }
   clacRegressionBetaZero() {
     this.regressionBetaZero = this.meanY - this.regressionBetaOne * this.meanX;
+    console.log("regression from Model.js : " + this.regressionBetaZero)
   }
 }
 
