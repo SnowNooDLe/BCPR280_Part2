@@ -20,6 +20,7 @@ class Calculator {
   }
   calculateRequirements(inputArray) {
     this.dataLength = inputArray[0].length;
+
     for (let i = 0; i < this.dataLength; i++) {
       this.sumX += inputArray[0][i];
       this.sumY += inputArray[1][i];
@@ -43,7 +44,6 @@ class Calculator {
     this.regressionBetaOne = numerator / denominator;
   }
   clacRegressionBetaZero() {
-    console.log("IM HERE");
     this.regressionBetaZero = this.meanY - this.regressionBetaOne * this.meanX;
   }
 }

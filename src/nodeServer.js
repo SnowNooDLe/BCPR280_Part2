@@ -6,37 +6,78 @@ var app = http.createServer(function (request, response){
         "Content-Type": "text/html",
         "Access-Control-Allow-Origin": "*"
     })
-    let dataXY = []
-    let dataStart = request.url.indexOf("?") + 1
-    let dataEnd = request.url.indexOf("&")
-    let dataX = request.url.slice(dataStart, dataEnd)
-    dataXY.push(dataX);
 
-    dataStart = request.url.indexOf("&") + 1
-    let dataY = request.url.slice(dataStart)
-    dataXY.push(dataY)
+    if (request.url.substring(2, 5) == 'cor'){
+        let dataXY = []
+        let dataStart = request.url.indexOf("?") + 4
+        let dataEnd = request.url.indexOf("&")
+        let dataString = request.url.slice(dataStart, dataEnd)
+        // convert to array at the ,
+        let arrayOfStrings = dataString.split(",")
+        // convert to number
+        let dataX = arrayOfStrings.map(s => Number(s))
+        dataXY.push(dataX);
 
-    console.log(dataX)
-    console.log(dataY)
-    console.log(dataXY)
+        dataStart = request.url.indexOf("&") + 1
+        dataString = request.url.slice(dataStart)
+        // convert to array at the ,
+        arrayOfStrings = dataString.split(",")
+        // convert to number
+        let dataY = arrayOfStrings.map(s => Number(s))
+        dataXY.push(dataY)
 
-    aCalculator.calculateRequirements(dataXY)
-    aCalculator.calcCorrelation()
-    let correlation = aCalculator.correlation
-    aCalculator.clacRegressionBetaOne()
-    let regressionBetaOne = aCalculator.regressionBetaOne
-    aCalculator.clacRegressionBetaZero()
-    let regressionBetaZero = aCalculator.regressionBetaZero
+        console.log(dataXY)
 
-    let result = {
-        "Correlation: ": correlation,
-        "Regression Beta One: ": regressionBetaOne,
-        "Regression Beta Zero: ": regressionBetaZero
+        aCalculator.calculateRequirements(dataXY)
+        aCalculator.calcCorrelation()
+        let correlation = aCalculator.correlation
+
+        let resultCorrelation = {
+            "Correlation: ": correlation
+        }
+
+        resultCorrelation = JSON.stringify(resultCorrelation)
+        response.write(resultCorrelation)
+        response.end()
+    } else if (request.url.substring(2, 5) == 'reg'){
+        let dataXY = []
+        let dataStart = request.url.indexOf("?") + 4
+        let dataEnd = request.url.indexOf("&")
+        let dataString = request.url.slice(dataStart, dataEnd)
+        // convert to array at the ,
+        let arrayOfStrings = dataString.split(",")
+        // convert to number
+        let dataX = arrayOfStrings.map(s => Number(s))
+        dataXY.push(dataX);
+
+        dataStart = request.url.indexOf("&") + 1
+        dataString = request.url.slice(dataStart)
+        // convert to array at the ,
+        arrayOfStrings = dataString.split(",")
+        // convert to number
+        let dataY = arrayOfStrings.map(s => Number(s))
+        dataXY.push(dataY)
+
+
+        aCalculator.calculateRequirements(dataXY)
+ 
+        aCalculator.clacRegressionBetaOne()
+        let regressionBetaOne = aCalculator.regressionBetaOne
+        aCalculator.clacRegressionBetaZero()
+        let regressionBetaZero = aCalculator.regressionBetaZero
+
+        let resultRegression = {
+            "Regression Beta One: ": regressionBetaOne,
+            "Regression Beta Zero: ": regressionBetaZero
+        }
+
+        resultRegression = JSON.stringify(resultRegression)
+        response.write(resultRegression)
+        response.end()
+    } else {
+
     }
-
-    result = JSON.stringify(result)
-    response.write(result)
-    response.end()
+    
 })
 
 app.listen(3000);

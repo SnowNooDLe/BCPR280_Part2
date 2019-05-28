@@ -3,7 +3,6 @@ class Controller {
     constructor() {
         this.files = [];
         this.numbers = [];
-        this.test = 0;
         this.submitStatus = false;
         this.correlation = "I am correlation";
         this.regressionBetaOne = "I am regression beta one.";
@@ -50,5 +49,10 @@ class Controller {
             this.regressionBetaOne = aCalculator.regressionBetaOne;
             this.regressionBetaZero = aCalculator.regressionBetaZero;
         }
+
+        // after doing regression part, reset the value
+        this.files = [];
+        this.numbers = [];
+        this.submitStatus = false;
     }
 }

@@ -17,28 +17,37 @@ class NodeController {
         this.submittatus = aController.submitStatus;
     }
     calcCorrelation() {
-        aNode.calculationRequest()
-        // aController.calcCorrelation();
-        // this.correlation = aController.correlation;
+        aNode.correlationRequest();
     }
     calcRegression() {
-        aNode.calculationRequest()
-        // aController.calcRegression();
-        // this.regressionBetaOne = aController.regressionBetaOne;
-        // this.regressionBetaZero = aController.regressionBetaZero;
+        aNode.regressionRequest();
     }
-    calculationRequest() {
+
+    correlationRequest() {
         let files = aController.numbers[0] + '&' + aController.numbers[1];
-        console.log(files);
         var xmlhttp, xxx;
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 xxx = xmlhttp.responseText;
-                document.getElementById('result').innerHTML = xxx;
+                document.getElementById('resultCorrelation').innerHTML = xxx;
             }
         };
-        xmlhttp.open('GET', 'http://localhost:3000/?' + files, true);
+        xmlhttp.open('GET', 'http://localhost:3000/?' + 'cor' + files, true);
+        xmlhttp.send();
+    }
+
+    regressionRequest() {
+        let files = aController.numbers[0] + '&' + aController.numbers[1];
+        var xmlhttp, xxx;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                xxx = xmlhttp.responseText;
+                document.getElementById('resultRegression').innerHTML = xxx;
+            }
+        };
+        xmlhttp.open('GET', 'http://localhost:3000/?' + 'reg' + files, true);
         xmlhttp.send();
     }
 }
