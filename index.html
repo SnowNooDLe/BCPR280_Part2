@@ -9,8 +9,13 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- Model  -->
     <script src="src/Model.js"></script>
+    <script src="src/NodeController.js"></script>
+    <script src="src/Controller.js"></script>
+
     <script>
         var aCalculator = new Calculator();
+        var aController = new Controller();
+        var aNode = new NodeController();
     </script>
     
 </head>
@@ -47,6 +52,50 @@
                         <div id="app2">
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card text-center" style="width: 35rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Assignment 2 with NodeJS</h5>
+                </div>
+                <div class="card-body">
+                    <!-- VIEW -->
+                    <!-- for NodeJS -->  
+                    <input type="file" id="dataX"></input><br />
+                    <input type="file" id="dataY"></input><br /><br />
+                    <script>
+                        document.getElementById('dataX').addEventListener('change', aNode.addFile);
+                        document.getElementById('dataY').addEventListener('change', aNode.addFile);
+                     </script>
+                    <button onclick="aNode.submitFiles()" class="btn btn-primary">Submit Files</button>
+                    <br />
+                    <br />
+                    <button onclick="aNode.calcCorrelation()" class="btn btn-primary">Show Correlation</button>
+                    <br />
+                    <br />
+                    <button onclick="aNode.calcRegression()" class="btn btn-primary">Show Regression</button>
+                    <br />
+                    <div></div>
+                    <div id="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card text-center" style="width: 35rem;">
+                <div class="card-header">
+                    <h5 class="card-title">Tester</h5>
+                </div>
+                <div class="card-body">
+                    <!-- redirect link to specrunner -->
+                    <input type="button" onclick="location.href='./specrunner.html';" value="Jasminejs Test" />
+                    <br /><br />
+                    <input type="button" onclick="location.href='./specrunner.html';" value="Cucumberjs Test" />
                 </div>
             </div>
         </div>
