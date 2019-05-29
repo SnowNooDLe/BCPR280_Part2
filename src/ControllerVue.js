@@ -13,7 +13,6 @@ Vue.component('c1', {
         <label class="custom-file-label" for="inputGroupFile01" style="text-align: left;">Choose file</label>
       </div>
     </div>
-    <br>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -23,16 +22,16 @@ Vue.component('c1', {
         <label class="custom-file-label" for="inputGroupFile01" style="text-align: left;">Choose file</label>
       </div>
     </div>
-    <br><br>
-    <button @click="submitFiles" class="btn btn-primary">Submit Files</button>
+    <br>
+    <button @click="submitFiles" class="btn btn-danger">Submit Files</button>
     <br><br>
     <button @click="calcCorrelationRegression" class="btn btn-primary">Show Correlation & Regression</button>
     <br> 
-    {{ correlation }}
+    <label>Correlation : </label> {{ correlation }}
     <br>
-    <label>Regression Beta One </label> {{ regressionBetaOne }}
+    <label>Regression Beta One : </label> {{ regressionBetaOne }}
     <br>
-    <label>Regression Beta Zero </label> {{ regressionBetaZero }}
+    <label>Regression Beta Zero : </label> {{ regressionBetaZero }}
   </div>`,
   data: function() {
     return{

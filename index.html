@@ -22,7 +22,8 @@
     
 </head>
 <body>
-
+    <!-- Bootcamp 4, with Badge -->
+    <h1>BCPR280 : Assignment 2 <span class="badge badge-secondary">SPA</span></h1>
     <!-- adding into card form 
     https://getbootstrap.com/docs/4.3/components/card/-->
     <!-- Bootstrap 1, Card -->
@@ -89,12 +90,13 @@
                             <label class="custom-file-label" for="dataY" style="text-align: left;">Choose file</label>
                         </div>
                     </div>
+                    
                     <script>
                         document.getElementById('dataX').addEventListener('change', aNode.addFileX);
                         document.getElementById('dataY').addEventListener('change', aNode.addFileY);
                      </script>
                      <!-- Bootstrap 2, button -->
-                    <button onclick="aNode.submitFiles()" class="btn btn-primary">Submit Files</button>
+                    <button onclick="aNode.submitFiles()" class="btn btn-danger">Submit Files</button>
                     <br />
                     <br />
                     <button onclick="aNode.calcCorrelationRegression()" class="btn btn-primary">Show Correlation & Regression</button>
@@ -222,11 +224,12 @@
                         </div>
                     </div>
                     <br />
-                    <button onClick={this.submitFiles} className="btn btn-primary">Submit Files</button>
+                    <button onClick={this.submitFiles} className="btn btn-danger">Submit Files</button>
                     <br />
                     <br />
                     <button onClick={this.calcCorrelationRegression} className="btn btn-primary">Show Correlation & Regression</button>
                     <br />
+                    <label>Correlation: {'\u00A0'}</label>
                     { this.state.cc.correlation }
                     <br />
                     <label>Regression Beta One: {'\u00A0'}</label>
