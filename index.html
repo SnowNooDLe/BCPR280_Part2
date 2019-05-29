@@ -69,19 +69,15 @@
                     <input type="file" id="dataX"></input><br />
                     <input type="file" id="dataY"></input><br /><br />
                     <script>
-                        document.getElementById('dataX').addEventListener('change', aNode.addFile);
-                        document.getElementById('dataY').addEventListener('change', aNode.addFile);
+                        document.getElementById('dataX').addEventListener('change', aNode.addFileX);
+                        document.getElementById('dataY').addEventListener('change', aNode.addFileY);
                      </script>
                     <button onclick="aNode.submitFiles()" class="btn btn-primary">Submit Files</button>
                     <br />
                     <br />
-                    <button onclick="aNode.correlationRequest()" class="btn btn-primary">Show Correlation</button>
+                    <button onclick="aNode.calcCorrelationRegression()" class="btn btn-primary">Show Correlation & Regression</button>
                     <br />
-                    <div id="resultCorrelation"></div>
-                    <br />
-                    <button onclick="aNode.regressionRequest()" class="btn btn-primary">Show Regression</button>
-                    <br />
-                    <div id="resultRegression"></div>
+                    <div id="resultCorrelationRegression"></div>
                     <br />
                 </div>
             </div>
@@ -113,59 +109,58 @@
     class Calculation extends React.Component{
         constructor (props){
             super(props);
-            this.addFileA = this.addFile.bind(this);
-            this.addFileB = this.addFile.bind(this);
+            this.addFileX = this.addFileX.bind(this);
+            this.addFileY = this.addFileY.bind(this);
             this.submitFiles = this.submitFiles.bind(this);
-            this.calcCorrelation = this.calcCorrelation.bind(this);
-            this.calcRegression = this.calcRegression.bind(this);
-            this.files = [];
-            this.numbers = [];
+            this.calcCorrelationRegression = this.calcCorrelationRegression.bind(this);
+            this.files = [[],[]];
+            this.numbers = [[],[]];
             this.submitStatus = false;
             this.state = {
                 cc: new Calculator()
             }
         }
 
-        addFile(event){
-            let aFile = event.target.files[0]
-            if (aFile.type === "text/plain") this.files.push(aFile);
+        addFileX(event) {
+            let aFile = event.target.files[0];
+            if (aFile.type === "text/plain"){
+            this.files[0] = aFile;
+            } 
+        }
+
+        addFileY(event){
+            let aFile = event.target.files[0];
+            if (aFile.type === "text/plain"){
+                this.files[1] = aFile;
+            }
         }
 
         submitFiles(event){
             if (this.files.length != 2){
                 alert("You need to submit two files then click it again.");
             } else {
+                var order = 0;
                 for (let file of this.files){
                     const reader = new FileReader();
                     reader.onload = e => {
                         let ct = e.target.result.split('\r\n').map(x => parseFloat(x));
-                        console.log(ct);
-                        this.numbers.push(ct);
+                        this.numbers[order] = ct;
+                        order++;
                     }
                     reader.readAsText(file);
                 }
                 this.submitStatus = true;
-                
             }
             
         }
 
-        calcCorrelation (event) {
+        calcCorrelationRegression (event) {
+            this.state.cc = new Calculator();
+            this.state.cc.calculateRequirements(this.numbers);
             if (this.submitStatus != true){
                 alert("Please submit two files first.");
             } else {
-                this.state.cc.calculateRequirements(this.numbers);
                 this.state.cc.calcCorrelation();
-                this.setState((state) => ({
-                    cc: state.cc
-                }))
-            }
-        }
-
-        calcRegression (event) {
-            if (this.submitStatus != true){
-                alert("Please submit two files first.");
-            } else {
                 this.state.cc.clacRegressionBetaOne();
                 this.state.cc.clacRegressionBetaZero();
                 this.setState((state) => ({
@@ -177,17 +172,15 @@
         render () {
             return (
                 <div>
-                    <input type="file" onChange={this.addFileA}></input><br />
-                    <input type="file" onChange={this.addFileB}></input><br />
+                    <input type="file" onChange={this.addFileX}></input><br />
+                    <input type="file" onChange={this.addFileY}></input><br />
                     <br />
                     <button onClick={this.submitFiles} class="btn btn-primary">Submit Files</button>
                     <br />
                     <br />
-                    <button onClick={this.calcCorrelation} class="btn btn-primary">Show Correlation</button>
+                    <button onClick={this.calcCorrelationRegression} class="btn btn-primary">Show Correlation & Regression</button>
                     <br />
                     { this.state.cc.correlation }
-                    <br />
-                    <button onClick={this.calcRegression} class="btn btn-primary">Show Regression</button>
                     <br />
                     <label>Regression Beta One: {'\u00A0'}</label>
                     { this.state.cc.regressionBetaOne }
