@@ -61,23 +61,22 @@ class Calculator {
     let right = this.dataLength * this.sumYSquare - Math.pow(this.sumY, 2);
     let correlationDenominator = Math.sqrt(left * right);
     this.correlation = correlationNumerator / correlationDenominator;
+    console.log("Correlation Numerator : " + correlationNumerator);
+    console.log("Left : " + left);
+    console.log("Right : " + right);
+    console.log("Correlation Denominator : " + correlationDenominator);
+    console.log("Correlation : " + this.correlation)
   }
   clacRegressionBetaOne() {
     let regressionNumerator = (this.sumXY - this.dataLength * this.meanX * this.meanY);
     let regressionDenominator = (this.sumXSquare - this.dataLength * Math.pow(this.meanX, 2));
     this.regressionBetaOne = regressionNumerator / regressionDenominator;
+    console.log("Regression Numerator : " + regressionNumerator);
+    console.log("Regression Denominator : " + regressionDenominator);
+    console.log("Regression Beta One : " + this.regressionBetaOne)
   }
   clacRegressionBetaZero() {
     this.regressionBetaZero = this.meanY - this.regressionBetaOne * this.meanX;
-    console.log("Sum X is : " + this.sumX);
-    console.log("Sum Y is : " + this.sumY);
-    console.log("Sum X Square is : " + this.sumXSquare);
-    console.log("Sum y Square is : " + this.sumYSquare);
-    console.log("Sum XY is : " + this.sumXY);
-    console.log("Mean X is : " + this.meanX);
-    console.log("Mean Y is : " + this.meanY);
-    console.log("Correlation is : " + this.correlation);
-    console.log("regression Beta One from Model.js : " + this.regressionBetaOne)
     console.log("regression Beta Zero from Model.js : " + this.regressionBetaZero)
   }
 }
