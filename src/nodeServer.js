@@ -7,7 +7,9 @@ var app = http.createServer(function (request, response){
         "Access-Control-Allow-Origin": "*"
     })
     let dataXY = []
+    // INPUT PROCESSING
     // for first file
+    // find characters after ?
     let dataStart = request.url.indexOf("?") + 1
     let dataEnd = request.url.indexOf("&")
     let dataString = request.url.slice(dataStart, dataEnd)
@@ -26,6 +28,7 @@ var app = http.createServer(function (request, response){
     let dataY = arrayOfStrings.map(s => Number(s))
     dataXY.push(dataY)
 
+    // CALCULATION
     var aCalculator = new Calculator()
 
     aCalculator.calculateRequirements(dataXY)
@@ -36,6 +39,7 @@ var app = http.createServer(function (request, response){
     aCalculator.clacRegressionBetaZero()
     let regressionBetaZero = aCalculator.regressionBetaZero
 
+    // OUTPUT PROCESSING
     let resultCorrelation = {
         "Correlation: " : correlation + "<br />" +
         "Regression Beta One: " + regressionBetaOne + "<br />" +

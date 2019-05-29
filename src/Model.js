@@ -19,6 +19,7 @@ class Calculator {
     this.regressionBetaZero = "I am regression beta zero.";
   }
   calculateRequirements(inputArray) {
+    console.log("Datas are " + inputArray);
     console.log("Before any calculation for requirements")
     console.log("Sum X is : " + this.sumX);
     console.log("Sum Y is : " + this.sumY);
