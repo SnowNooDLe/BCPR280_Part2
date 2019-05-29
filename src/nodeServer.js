@@ -7,6 +7,7 @@ var app = http.createServer(function (request, response){
         "Access-Control-Allow-Origin": "*"
     })
     let dataXY = []
+    // for first file
     let dataStart = request.url.indexOf("?") + 1
     let dataEnd = request.url.indexOf("&")
     let dataString = request.url.slice(dataStart, dataEnd)
@@ -16,6 +17,7 @@ var app = http.createServer(function (request, response){
     let dataX = arrayOfStrings.map(s => Number(s))
     dataXY.push(dataX);
 
+    // for second file
     dataStart = request.url.indexOf("&") + 1
     dataString = request.url.slice(dataStart)
     // convert to array at the ,
@@ -24,7 +26,6 @@ var app = http.createServer(function (request, response){
     let dataY = arrayOfStrings.map(s => Number(s))
     dataXY.push(dataY)
 
-    // console.log(dataXY)
     var aCalculator = new Calculator()
 
     aCalculator.calculateRequirements(dataXY)
@@ -36,9 +37,9 @@ var app = http.createServer(function (request, response){
     let regressionBetaZero = aCalculator.regressionBetaZero
 
     let resultCorrelation = {
-        "Correlation: ": correlation,
-        "Regression Beta One: ": regressionBetaOne,
-        "Regression Beta Zero: ": regressionBetaZero
+        "Correlation: " : correlation + "<br />" +
+        "Regression Beta One: " + regressionBetaOne + "<br />" +
+        "Regression Beta Zero: " + regressionBetaZero + "<br />"
     }
 
     resultCorrelation = JSON.stringify(resultCorrelation)

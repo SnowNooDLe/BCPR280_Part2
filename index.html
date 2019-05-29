@@ -7,6 +7,8 @@
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- for custom file input usage -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Model  -->
     <script src="src/Model.js"></script>
     <script src="src/NodeController.js"></script>
@@ -20,8 +22,10 @@
     
 </head>
 <body>
+
     <!-- adding into card form 
     https://getbootstrap.com/docs/4.3/components/card/-->
+    <!-- Bootstrap 1, Card -->
     <div class="row">
         <div class="col-sm-6">
             <div class="card text-center" style="width: 35rem;">
@@ -66,12 +70,30 @@
                 <div class="card-body">
                     <!-- VIEW -->
                     <!-- for NodeJS -->  
-                    <input type="file" id="dataX"></input><br />
-                    <input type="file" id="dataY"></input><br /><br />
+                    <!-- Bootstrap 3, Custom file input -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="dataX" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="dataX" style="text-align: left;">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="dataY" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="dataY" style="text-align: left;">Choose file</label>
+                        </div>
+                    </div>
                     <script>
                         document.getElementById('dataX').addEventListener('change', aNode.addFileX);
                         document.getElementById('dataY').addEventListener('change', aNode.addFileY);
                      </script>
+                     <!-- Bootstrap 2, button -->
                     <button onclick="aNode.submitFiles()" class="btn btn-primary">Submit Files</button>
                     <br />
                     <br />
@@ -119,6 +141,15 @@
             this.state = {
                 cc: new Calculator()
             }
+        }
+
+        // I know we should not use jQuery with react as react handles event directly and
+        // uses a virtual DOM but I wanted to look all same. (Same functioning to Vue and Node)
+        componentDidMount() {
+            $(".custom-file-input").on("change", function() {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
         }
 
         addFileX(event) {
@@ -172,13 +203,29 @@
         render () {
             return (
                 <div>
-                    <input type="file" onChange={this.addFileX}></input><br />
-                    <input type="file" onChange={this.addFileY}></input><br />
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div className="custom-file">
+                            <input type="file" onChange={this.addFileX} className="custom-file-input" id="dataX" aria-describedby="inputGroupFileAddon01"></input>
+                            <label className="custom-file-label" htmlFor="dataX" style={{textAlign : 'left'}}>Choose file</label>
+                        </div>
+                    </div>
+                    <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div className="custom-file">
+                            <input type="file" onChange={this.addFileY} className="custom-file-input" id="dataY" aria-describedby="inputGroupFileAddon01"></input>
+                            <label className="custom-file-label" htmlFor="dataY" style={{textAlign : 'left'}}>Choose file</label>
+                        </div>
+                    </div>
                     <br />
-                    <button onClick={this.submitFiles} class="btn btn-primary">Submit Files</button>
+                    <button onClick={this.submitFiles} className="btn btn-primary">Submit Files</button>
                     <br />
                     <br />
-                    <button onClick={this.calcCorrelationRegression} class="btn btn-primary">Show Correlation & Regression</button>
+                    <button onClick={this.calcCorrelationRegression} className="btn btn-primary">Show Correlation & Regression</button>
                     <br />
                     { this.state.cc.correlation }
                     <br />
@@ -200,6 +247,13 @@
         )
     </script>
 
-    
+    <script>
+        // Add the following code to appear file name on select
+        // shouldn't use jQuery for react, so wont work for react
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 </body>
 </html> 
