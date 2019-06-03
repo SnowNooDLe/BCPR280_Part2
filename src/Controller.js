@@ -26,7 +26,8 @@ class Controller {
 
     // updated version so it still works with new files by user changing
     submitFiles() {
-      if (this.files.length != 2){
+      // To check whether user puts 2 datas
+      if (this.files[0].length == 0 || this.files[1].length == 0){
           alert("You need to submit two files then click it again.");
       } else {
         var order = 0;

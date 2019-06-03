@@ -18,7 +18,7 @@ class Calculator {
     this.regressionBetaOne = "I am regression beta one.";
     this.regressionBetaZero = "I am regression beta zero.";
   }
-  calculateRequirements(inputArray) {
+  static calculateRequirements(inputArray) {
     console.log("Datas are " + inputArray);
     console.log("Before any calculation for requirements")
     console.log("Sum X is : " + this.sumX);
@@ -55,7 +55,7 @@ class Calculator {
     console.log("regression Beta One from Model.js : " + this.regressionBetaOne)
     console.log("regression Beta Zero from Model.js : " + this.regressionBetaZero)
   }
-  calcCorrelation() {
+  static calcCorrelation() {
     let correlationNumerator = (this.dataLength * this.sumXY) - (this.sumX * this.sumY);
     let left = this.dataLength * this.sumXSquare - Math.pow(this.sumX, 2);
     let right = this.dataLength * this.sumYSquare - Math.pow(this.sumY, 2);
@@ -67,16 +67,16 @@ class Calculator {
     console.log("Correlation Denominator : " + correlationDenominator);
     console.log("Correlation : " + this.correlation)
   }
-  clacRegressionBetaOne() {
-    let regressionNumerator = (this.sumXY - this.dataLength * this.meanX * this.meanY);
-    let regressionDenominator = (this.sumXSquare - this.dataLength * Math.pow(this.meanX, 2));
+  static clacRegressionBetaOne() {
+    let regressionNumerator = this.sumXY - (this.dataLength * this.meanX * this.meanY);
+    let regressionDenominator = this.sumXSquare - (this.dataLength * Math.pow(this.meanX, 2));
     this.regressionBetaOne = regressionNumerator / regressionDenominator;
     console.log("Regression Numerator : " + regressionNumerator);
     console.log("Regression Denominator : " + regressionDenominator);
     console.log("Regression Beta One : " + this.regressionBetaOne)
   }
-  clacRegressionBetaZero() {
-    this.regressionBetaZero = this.meanY - this.regressionBetaOne * this.meanX;
+  static clacRegressionBetaZero() {
+    this.regressionBetaZero = this.meanY - (this.regressionBetaOne * this.meanX);
     console.log("regression Beta Zero from Model.js : " + this.regressionBetaZero)
   }
 }

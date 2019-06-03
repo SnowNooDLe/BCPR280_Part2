@@ -117,8 +117,6 @@
                 <div class="card-body">
                     <!-- redirect link to specrunner -->
                     <input type="button" onclick="location.href='./specrunner.html';" value="Jasminejs Test" />
-                    <br /><br />
-                    <input type="button" onclick="location.href='./specrunner.html';" value="Cucumberjs Test" />
                 </div>
             </div>
         </div>
@@ -171,7 +169,7 @@
         }
 
         submitFiles(event){
-            if (this.files.length != 2){
+            if (this.files[0].length == 0 || this.files[1].length == 0){
                 alert("You need to submit two files then click it again.");
             } else {
                 var order = 0;
