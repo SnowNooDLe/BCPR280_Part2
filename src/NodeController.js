@@ -25,7 +25,11 @@ class NodeController {
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
                 xxx = xmlhttp.responseText;
-                document.getElementById('resultCorrelationRegression').innerHTML = xxx;
+                // Luofeng's advice, converting JSON to object, to make node UI look better
+                var obj = JSON.parse(xxx);
+                document.getElementById('nodeCorrelation').innerHTML = obj.Correlation;
+                document.getElementById('nodeRegressionBetaOne').innerHTML = obj.RegressionBetaOne;
+                document.getElementById('nodeRegressionBetaZero').innerHTML = obj.RegressionBetaZero;
             }
         };
         xmlhttp.open('GET', 'http://localhost:3000/?' + files, true);

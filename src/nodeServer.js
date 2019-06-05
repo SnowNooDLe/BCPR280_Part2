@@ -3,7 +3,7 @@ var Calculator = require("./Model.js")
 // var aCalculator = new Calculator
 var app = http.createServer(function (request, response){
     response.writeHead(200, {
-        "Content-Type": "text/html",
+        "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*"
     })
     let dataXY = []
@@ -41,9 +41,9 @@ var app = http.createServer(function (request, response){
 
     // OUTPUT PROCESSING
     let resultCorrelation = {
-        "Correlation: " : correlation + "<br />" +
-        "Regression Beta One: " + regressionBetaOne + "<br />" +
-        "Regression Beta Zero: " + regressionBetaZero + "<br />"
+        "Correlation" : correlation,
+        "RegressionBetaOne" : regressionBetaOne,
+        "RegressionBetaZero" : regressionBetaZero
     }
 
     resultCorrelation = JSON.stringify(resultCorrelation)
