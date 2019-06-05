@@ -4,7 +4,7 @@
 # Instruction
 ## Running program with UI, browser
 1. Please run 'nodeServer.js' file that is under src directory.
-    e.g. node nodeServer.js in terminal / command.
+    * e.g. node nodeServer.js in terminal / command.
 2. Then jump into index.html
 3. Choose two files between testdata1 ~ testdata3 txt files.
 4. Submit files (Do not worry, if you are trying to submit without choosing two files, will see warning pop up)
@@ -13,19 +13,18 @@
 7. Enjoy.
 
 ## To run command line application for nodejs
-1. type 
-    node Calculator_Command.js testData1.txt TestData2.txt result.txt
-    in command line
+1. type this in command line 
+    * node Calculator_Command.js testData1.txt TestData2.txt result.txt  
 2. Will automatically generate txt file called 'result.txt' with Correlation & Regression value
 3. Simply 
-    node - to run node file
-    Calculator_Command.js - name of the file that we want to run
-    testData1.txt - first file to read
-    TestData2.txt - second file to read
-    result.txt - place where result will be stored
+    * node - to run node file
+    * Calculator_Command.js - name of the file that we want to run
+    * testData1.txt - first file to read
+    * TestData2.txt - second file to read
+    * result.txt - place where result will be stored
 
 
-##Aim: Write a program that calculates the correlation of two arrays of numbers
+## Aim: Write a program that calculates the correlation of two arrays of numbers
 Things to do
 1. Adapt / extend the first program to calculate the regression of two arrays of numbers.
 2. Provide a user interface with Vuejs
