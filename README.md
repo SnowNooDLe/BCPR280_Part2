@@ -1,4 +1,5 @@
 # BCPR280_Part2
+<img src="/img/portfolio.JPG" alt="working page looks like" class="inline"/>
 Aim: Write a program that calculates the correlation of two arrays of numbers
 Things to do
 1. Adapt / extend the first program to calculate the regression of two arrays of numbers.
