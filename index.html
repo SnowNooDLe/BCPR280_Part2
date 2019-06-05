@@ -98,19 +98,18 @@
                      </script>
                      <!-- Bootstrap 2, button -->
                     <button onclick="aNode.submitFiles()" class="btn btn-danger">Submit Files</button>
-                    <br />
-                    <br />
+                    <br>
+                    <br>
                     <!-- Bootstrap 2, button -->
                     <button onclick="aNode.calcCorrelationRegression()" class="btn btn-primary">Show Correlation & Regression</button>
-                    <br />
+                    <br>
                     
                     <br> 
                     <label>Correlation : </label> <label id="nodeCorrelation">I am correlation</label>
                     <br>
-                    <label>Regression Beta One : </label> <label id="nodeRegressionBetaOne"></label>
+                    <label>Regression Beta One : </label> <label id="nodeRegressionBetaOne">I am regression beta one.</label>
                     <br>
-                    <label>Regression Beta Zero : </label> <label id="nodeRegressionBetaZero"></label>
-                    <br />
+                    <label>Regression Beta Zero : </label> <label id="nodeRegressionBetaZero">I am regression beta zero.</label>
                 </div>
             </div>
         </div>
@@ -258,7 +257,7 @@
 
     <script>
         // Add the following code to appear file name on select
-        // shouldn't use jQuery for react, so wont work for react
+        // shouldn't use jQuery for react
         $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);

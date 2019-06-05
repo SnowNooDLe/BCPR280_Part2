@@ -1,0 +1,3 @@
+Correlation is : 0.9978340665177264
+Regression Beta One is : 1.0913454583881113
+Regression Beta Zero is : 38.005190611505896

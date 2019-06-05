@@ -46,7 +46,6 @@ readFile(inFileA, 'utf8', (error, text) => {
       appendFileSync(outFile, 'Correlation is : ' + correlation + '\r\n')
       appendFileSync(outFile, 'Regression Beta One is : ' + regressionBetaOne + '\r\n')
       appendFileSync(outFile, 'Regression Beta Zero is : ' + regressionBetaZero + '\r\n')
-      console.log("Am I getting in here : " + calc.correlation)
     } catch (err) {
         console.log(err)
     }
