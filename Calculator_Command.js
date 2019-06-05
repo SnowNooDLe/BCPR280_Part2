@@ -1,16 +1,7 @@
-// CommonJS Modules, one ECMAScript 5 module systems, in Node.js
 const {
   readFile,
   appendFileSync
 } = require('fs')
-
-
-/* 
-// when using fs.promises API of Node
-const fs = require('fs')
-const fsPromises = fs.promises 
-*/
-
 
 const Calc = require('./src/Model.js')
 let calc = new Calc()
