@@ -50,7 +50,7 @@ Vue.component('c1', {
     },
     submitFiles: function(){
       aController.submitFiles();
-      this.submittatus = aController.submitStatus;
+      this.submitStatus = aController.submitStatus;
     },
     calcCorrelationRegression: function(){
       aController.calcCorrelationRegression();

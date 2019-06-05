@@ -13,10 +13,15 @@ class NodeController {
 
     submitFiles() {
         aController.submitFiles();
-        this.submittatus = aController.submitStatus;
+        this.submitStatus = aController.submitStatus;
     }
     calcCorrelationRegression() {
-        aNode.resultRequest();
+        if (this.submitStatus != true){
+            alert("Please submit two files first.");
+        } else {
+            aNode.resultRequest();
+        }
+        
     }
     resultRequest() {
         let files = aController.numbers[0] + '&' + aController.numbers[1];
