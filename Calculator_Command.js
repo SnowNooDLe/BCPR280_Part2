@@ -34,9 +34,11 @@ readFile(inFileA, 'utf8', (error, text) => {
     let regressionBetaZero = calc.regressionBetaZero
 
     try {
+      console.log("Adding results into file : " + outFile)
       appendFileSync(outFile, 'Correlation is : ' + correlation + '\r\n')
       appendFileSync(outFile, 'Regression Beta One is : ' + regressionBetaOne + '\r\n')
       appendFileSync(outFile, 'Regression Beta Zero is : ' + regressionBetaZero + '\r\n')
+      console.log("Results are successfuly put into file : " + outFile)
     } catch (err) {
         console.log(err)
     }
